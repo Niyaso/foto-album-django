@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Photo | MyGallery</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom Styling (optional for portfolio look) -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body class="m-5">
+    <div class="container">
+
+        <!-- Centered form card -->
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                
+                <!-- Back to Gallery Button -->
+                <a href="{% url 'gallery' %}" class="btn btn-dark my-3">← Back to Gallery</a>
+
+                <div class="card p-3">
+                    <h4 class="text-center mb-3">Upload a New Photo</h4>
+
+                    <!-- Photo Upload Form -->
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <!-- Description input -->
+                        <div class="form-group mb-3">
+                            <label for="description">Description</label>
+                            <input id="description" name="description" type="text" class="form-control" required
+                                placeholder="Enter a short description">
+                        </div>
+
+                        <!-- Category dropdown -->
+                        <div class="form-group mb-3">
+                            <label for="category">Select a Category</label>
+                            <select id="category" name="category" class="form-control">
+                                <option value="none" selected>Select a category...</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Create new category input -->
+                        <div class="form-group mb-3">
+                            <label for="category_new">Or Create a New Category</label>
+                            <input id="category_new" name="category_new" type="text" class="form-control"
+                                placeholder="Create a new category">
+                        </div>
+
+                        <!-- Image upload input -->
+                        <div class="form-group mb-4">
+                            <label for="images">Upload Image(s)</label>
+                            <input id="images" name="images" type="file" class="form-control" multiple required>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary">Submit Photo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

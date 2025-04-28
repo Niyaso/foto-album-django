@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Photo Details</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <style>
+        .photo-container {
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .photo-container img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .description-box {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <div class="container py-5">
+        <a href="{% url 'gallery' %}" class="btn btn-dark mb-4">← Back to Gallery</a>
+
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+
+                <div class="photo-container mb-4">
+                    <img src="{{ photo.image.url }}" alt="Photo">
+                </div>
+
+                <div class="description-box">
+                    <strong>Description:</strong>
+                    <p class="mb-0">{{ photo.description|linebreaksbr }}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

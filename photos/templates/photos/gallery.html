@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyGallery | Photo Gallery</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- Custom Styles -->
+    <style>
+        .image-thumbnail {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: #343a40;
+            font-weight: 500;
+        }
+
+        .list-group-item a:hover {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+
+<body class="m-5 bg-light">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- Sidebar: Category Filter + Actions -->
+            <div class="col-md-3 mb-4">
+                {% if request.user.is_authenticated %}
+                    <p class="fw-bold mb-2">Welcome, {{ request.user }}</p>
+                {% endif %}
+
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <!-- Link to view all photos -->
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a>
+                        </li>
+
+                        <!-- Loop through available categories -->
+                        {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}?category={{ category.name }}">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+
+                        <!-- Action buttons -->
+                        <li class="list-group-item text-center">
+                            <a href="{% url 'add' %}" class="btn btn-outline-primary btn-sm w-100 mb-2">Add Photo</a>
+                            <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm w-100">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content: Photo Gallery Grid -->
+            <div class="col-md-9">
+                <div class="row">
+
+                    <!-- Loop through all photos -->
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img class="image-thumbnail" src="{{ photo.image.url }}" alt="Photo Thumbnail">
+
+                            <div class="card-body">
+                                <p class="mb-1"><small class="text-muted">Category: {{ photo.category.name }}</small></p>
+                                <a href="{% url 'photo' photo.id %}" class="btn btn-sm btn-outline-dark mt-2">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <!-- Shown if there are no photos -->
+                    <div class="col-12">
+                        <div class="alert alert-warning" role="alert">
+                            No photos found in this category.
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

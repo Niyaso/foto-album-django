@@ -1,19 +1,26 @@
-# photo-album-app
+# Foto Album 📸
 
- credits 
+A full-stack photo album web application built with Django, allowing users to create and manage albums, upload photos, and organize content by category.
 
+## 🔧 Features
 
-How I Learned Django
-I learned Django from this YouTuber. As a beginner, I followed his tutorial to build this project. The tutorial guided me step-by-step in setting up the Django framework, creating models, views, and templates, and incorporating user authentication.
+- User registration and login
+- Create and manage photo albums
+- Upload images to specific albums
+- Categorize and filter photos
+- Full CRUD support for albums and images
+- Secure authentication and session management
 
+## 🛠 Tech Stack
 
+- **Backend:** Django, Django ORM
+- **Frontend:** HTML, CSS, Bootstrap, JavaScript
+- **Database:** MySQL
+- **Other:** Django’s built-in auth system
 
-A photo album website with Django &amp;  Images on AWS S3 Buckets.
+## 🚀 Getting Started
 
-Tutorial on youtube: https://youtu.be/sSquD2u5Ie0
-Muilti image upload tutorial: https://youtu.be/Ws7Wy5EHaXY
-
-![DEMO](../master/static/images/demo.jpg)
-
-
-fekfneklfne
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Niyaso/foto-album.git
+   cd foto-album
